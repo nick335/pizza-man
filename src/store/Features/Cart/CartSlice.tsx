@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 interface cartDisplay {
   isOpen: boolean
 }
-interface cartItems {
+export interface cartItems {
   id: number,
   isPizza: boolean,
   quantity: number,
@@ -42,7 +42,6 @@ const cartSlice = createSlice({
       const isPizza:boolean = action.payload.isPizza
       const quantity:number = action.payload.quantity
       const price:number = action.payload.price
-      console.log(quantity)
       if(isPizza){
         if(state.cartItems.pizzaData.length === 0){
           state.cartItems.pizzaData.push({
@@ -150,20 +149,26 @@ const cartSlice = createSlice({
       if(isPizza){
         state.cartItems.pizzaData.forEach((each, idx) => {
           if(each.id === id){
-            state.cartItems.pizzaData.slice(idx, 1)
+            console.log(id, idx)
+            state.cartItems.pizzaData.splice(idx, 1)
+            console.log()
           }
         })
       }else{
         state.cartItems.dessertData.forEach((each, idx) => {
           if(each.id === id){
-            state.cartItems.dessertData.slice(idx, 1)
+            state.cartItems.dessertData.splice(idx, 1)
           }
         })
       }
+    }, 
+    clearCart: (state) =>{
+      state.cartItems.pizzaData = []
+      state.cartItems.dessertData = []
     }
   }
 })
 
 
 export default cartSlice.reducer
-export const {toggleCartDisplay, increaseCartItemQtn, decreaseCartItemQtn, removeCartItem} = cartSlice.actions
+export const {toggleCartDisplay, increaseCartItemQtn, decreaseCartItemQtn, removeCartItem, clearCart} = cartSlice.actions

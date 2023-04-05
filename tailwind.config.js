@@ -50,7 +50,10 @@ module.exports = {
        },
        screens: {
         'xsm': '340px',
-        'xs': '450px'
+        'xs': '450px',
+        'xmd': '900px',
+        'ssm' : '520px',
+        'xssm': '590px'
        },
        clipPath: {
         mypolygon: "polygon(50% 100%, 0 0, 100% 0)"
@@ -65,6 +68,7 @@ module.exports = {
     require('tailwind-clip-path'),
     require('tailwindcss'),
     require('autoprefixer'),
-    require("tailwindcss-animation-delay")
+    require("tailwindcss-animation-delay"),
+    require("tailwind-scrollbar")({ nocampatible: true })
   ],
 }

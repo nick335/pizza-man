@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Action } from "@remix-run/router";
+import { cartItems } from "../Cart/CartSlice";
 
 interface Data {
   description: string
@@ -68,7 +69,6 @@ interface PizzaData extends Data{
         state.pizzaData.forEach((each, idx) => {
           if(each.id === id){
             state.pizzaData[idx].quantity += 1;
-            console.log(state.pizzaData[idx].quantity)
           }
         })
       }else{
@@ -120,9 +120,28 @@ interface PizzaData extends Data{
           }
         })
       }
+    },
+    resetAllQtn:(state, action) => {
+      const pizzaData: Array<cartItems> = action.payload.pizzaData
+      const dessertData: Array<cartItems>  = action.payload.dessertData
+
+      state.pizzaData.forEach((each, idx) => {
+        pizzaData.forEach((item) => {
+          if(item.id === each.id){
+            state.pizzaData[idx].quantity = 0
+          }
+        })
+      })
+      state.DessertData.forEach((each, idx) => {
+        dessertData.forEach((item) => {
+          if(item.id === each.id){
+            state.DessertData[idx].quantity = 0
+          }
+        })
+      })
     }
   }
  })
 
  export default dataSlice.reducer
- export const {setData, addQtn, reduceQtn, deleteQtn} = dataSlice.actions
+ export const {setData, addQtn, reduceQtn, deleteQtn, resetAllQtn} = dataSlice.actions

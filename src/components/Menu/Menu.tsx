@@ -37,7 +37,7 @@ export default function Menu() {
         </div>
         <div className='my-6'>
           {
-             pizzamanData.isLoading ? <div>loading....</div> : pizzamanData.isError ? <div>error....</div> : 
+             pizzamanData.isLoading ? <div>loading....</div> : pizzamanData.isError ? <div>{pizzamanData.error.message}</div> : 
              <>
               <Pizzas />
               <Desserts />
