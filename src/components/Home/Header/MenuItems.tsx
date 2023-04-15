@@ -5,8 +5,8 @@ import { RootState } from '../../../store/RootReducer'
 import { NavLink } from 'react-router-dom'
 import { toggleMenu } from '../../../store/Features/Menu/MenuSlice'
 export default function MenuItems() {
-  const [user, setUser] = React.useState<boolean>(true)
   const { isOpen } = useSelector((state: RootState) => state.menu)
+  const { uid } = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
   return (
     <div className={`md:static md:block lg:w-fit lg:h-fit absolute top-0 left-0 w-screen h-screen md:h-fit md:w-fit  bg-black z-30 bg-opacity-75 overflow-hidden ${ isOpen ? 'block' : 'hidden'} md:bg-transparent md:bg-opacity-100 md:z-0 md:ml-auto`}>
@@ -22,7 +22,7 @@ export default function MenuItems() {
           )}
           </NavLink>
           {
-            user ? 
+            uid ? 
             <>
               <NavLink to="/orders" end>{({isActive})=>(
                 <li onClick={() => dispatch(toggleMenu())} className={`menuList ${isActive ? 'menuActive' : 'menuHover'}`}>Orders</li>

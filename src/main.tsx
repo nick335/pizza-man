@@ -16,6 +16,7 @@ import { AnimatePresence } from 'framer-motion';
 // import { useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Toaster } from 'react-hot-toast';
 
 
 // const location = useLocation()
@@ -63,6 +64,7 @@ root.render(
       <Provider store={store}>
         <AnimatePresence mode='wait'>
           <RouterProvider router={router} />
+          <Toaster />
         </AnimatePresence>
       </Provider>
     </QueryClientProvider>

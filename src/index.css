@@ -221,7 +221,10 @@ li {
     @apply top-[25%] right-[18%] scale-[0.5];
   }
   .input{
-    @apply bg-inputBg focus:bg-inputFocus hover:bg-inputHover py-3 px-4 w-full outline-none border-none transition-all ease-in-out duration-500 rounded-2xl text-black mt-4 focus:placeholder-white;
+    @apply bg-inputBg focus:bg-inputFocus hover:bg-inputHover py-3 px-4 w-full outline-none  transition-all ease-in-out duration-500 rounded-2xl text-black mt-4 focus:placeholder-white;
+  }
+  .input-error {
+    @apply border-2 border-errorBorder transition-all ease-in-out duration-100;
   }
   .google{
     @apply w-[18px] h-[18px] object-cover;
