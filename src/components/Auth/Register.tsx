@@ -11,12 +11,25 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../store/RootReducer'
 import { setUid } from '../../store/Features/User/UserSlice'
 import toast from 'react-hot-toast';
+import { collection, doc, setDoc } from 'firebase/firestore'
+import { useFirestoreDocumentMutation } from '@react-query-firebase/firestore'
 
 export default function Register() {
   const mutation = useAuthCreateUserWithEmailAndPassword(auth)
-  
   const { uid } = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
+  const collectionRef = collection(firestore, 'users')
+  // if(mutation.isSuccess){
+  //   console.log(uid)
+  //   const ref = doc(collectionRef, 'tftfytyy')
+  //   const firestoreMutation = useFirestoreDocumentMutation(ref)
+  //   firestoreMutation.mutate({
+  //     currentOrder: [],
+  //     orderHistory: [],
+  //     address: []
+  //   })
+  //   console.log('working')
+  // }
 
   const pageMotion = {
     initial: {opacity: 0, },
@@ -60,6 +73,18 @@ export default function Register() {
       onSuccess(user){
         console.log(user)
         dispatch(setUid(user.user.uid))
+        const docName = user.user.uid
+        const layout = {
+          currentOrder: [],
+          orderHistory: [],
+          address: []
+        }
+        setDoc(doc(firestore, "users", docName), layout).catch((error) =>
+        toast.error(error.message, {
+          duration: 4000,
+          position: 'top-left'
+        })
+        )
       }
     })
 
@@ -68,7 +93,7 @@ export default function Register() {
     <motion.section className='heightLayout' initial="initial" animate="animate" exit="exit" variants={pageMotion}>
       <div className='layout'>
         <div className='border-b-2 border-headerColor'>
-          <h2 className='header'>Login</h2>
+          <h2 className='header'>Register</h2>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='mt-1'>

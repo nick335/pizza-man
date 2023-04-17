@@ -8,7 +8,7 @@ import { nanoid } from '@reduxjs/toolkit'
 
 
 export default function Pizzas() {
-  const vegElements:any  = []
+  const vegElements:any = [] 
   const nonVegElements:any = []
   const { pizzaData } = useSelector((state: RootState) => state.data)
  
