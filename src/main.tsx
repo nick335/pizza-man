@@ -24,6 +24,7 @@ import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 import PrivateRoute from './components/Routes/PrivateRoute';
+import PrivateRoute2 from './components/Routes/PrivateRoute2';
 
 
 // const location = useLocation()
@@ -57,7 +58,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/Checkout",
-        element: <React.Suspense fallback={<>loading...</>}><Checkout /></React.Suspense>
+        element: <React.Suspense fallback={<>loading...</>}><PrivateRoute2  children={<Checkout />}/></React.Suspense>
       }
     ]
   }

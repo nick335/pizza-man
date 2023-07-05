@@ -1,7 +1,6 @@
 import PageTemplate from "./components/PageTemplate"
 
 
-
 function App() {
 
   return (

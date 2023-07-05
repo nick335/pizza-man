@@ -26,7 +26,7 @@ export default function Header() {
         <MenuItems />
         <div className={`ml-auto relative ${ isOpen ? 'mr-16' : 'mr-4' } md:ml-12 md:mr-0`}>
           <FontAwesomeIcon icon={faCartShopping} className="text-lg text-BarBg"  onClick={() => dispatch(toggleCartDisplay())}/>
-          <div className=' absolute -top-1 -right-1 text-white w-3.5 h-3.5 z-10  text-[8px] rounded-full bg-LinkColor flex items-center justify-center' onClick={() => dispatch(toggleCartDisplay())}>{noOfCartItems}</div>
+          <div className=' absolute -top-1 -right-1 text-white w-3.5 h-3.5 z-10  text-[8px] rounded-full bg-LinkColor flex items-center justify-center cursor-pointer' onClick={() => dispatch(toggleCartDisplay())}>{noOfCartItems}</div>
         </div>
         <div className={`md:hidden mr-4 cursor-pointer ${ isOpen ? ' fixed right-[3.5%] z-50 ' : ''}`} onClick={() => dispatch(toggleMenu())}>
           <div className= {`bar ${isOpen ? 'translate-y-[8px] rotate-45 bg-slate-50' : ''}`}  ></div>

@@ -5,12 +5,15 @@ import { RootState } from '../../store/RootReducer'
 import { nanoid } from '@reduxjs/toolkit'
 import { resetAllQtn } from '../../store/Features/Data/DataSlice'
 import { clearCart } from '../../store/Features/Cart/CartSlice'
+import { toggleCartDisplay } from '../../store/Features/Cart/CartSlice'
 // import { cartItems } from '../../store/Features/Cart/CartSlice'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function CartItems() {
   const { cartItems } = useSelector((state: RootState) => state.cart)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { pizzaData, DessertData } = useSelector((state: RootState) => state.data)
   const elements:any = []
   let total:number = 0
@@ -57,6 +60,11 @@ export default function CartItems() {
     dispatch(resetAllQtn({pizzaData, dessertData}))
     dispatch(clearCart())
   }
+
+  function toCheckout(){
+    navigate('/checkout')
+    dispatch(toggleCartDisplay())
+  }
   return (
     <div>
         <div className='max-h-[60vh] overflow-y-scroll'>
@@ -66,7 +74,7 @@ export default function CartItems() {
         <h3 className='font-bold text-headerColor text-lg'>Total: ${total} </h3>
       </div>
       <div className='my-4  w-full flexCenter gap-4'>
-        <button className='btn font-Roboto'>To Check Out</button>
+        <button className='btn font-Roboto' onClick={toCheckout}>To Check Out</button>
         <button className='btn bg-youtube font-Roboto' onClick={handleClearCart}>Clear Cart</button>
       </div>
       

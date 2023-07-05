@@ -21,7 +21,7 @@ export default function Desserts() {
   })
   return (
       <div>
-        <div className='y-flex mb-1'>
+        <div className='y-flex mb-3 mt-7'>
           <h3 className='checkout-header'>Dessert</h3>
           <div className='checkout-bar'></div>
         </div>

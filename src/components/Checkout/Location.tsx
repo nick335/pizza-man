@@ -1,9 +1,12 @@
-import React from 'react'
-import AddressForm from './AddressForm'
 import AddressSummary from './AddressSummary'
-import EmptyAddress from './EmptyAddress'
 
-export default function Location() {
+
+interface props{
+  addAddress: () => void
+}
+
+
+export default function Location({addAddress}: props) {
   return (
     <div className='mb-8'>
       <div className='y-flex mb-1'>
@@ -12,9 +15,7 @@ export default function Location() {
       </div>
       <div>
         <strong>Address: </strong>
-        {/* <EmptyAddress /> */}
-        {/* <AddressForm /> */}
-        <AddressSummary />
+        <AddressSummary addAddress = {addAddress} />
       </div>
     </div>
   )

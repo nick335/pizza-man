@@ -8,6 +8,6 @@ interface routeProps {
 }
 
 export default function PrivateRoute({ children}: routeProps) {
-  const { uid } = useSelector((state: RootState) => state.user)
-  return uid ? <>{children}</> : <Navigate to='/' />
+  const { loggedIn } = useSelector((state: RootState) => state.user.auth)
+  return loggedIn ? <>{children}</> : <Navigate to='/' />
 }

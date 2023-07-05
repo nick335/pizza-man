@@ -54,7 +54,7 @@ export default function Pizzas() {
           </div>
         </div>
         <div className=''>
-          <div className='y-flex mb-2'>
+          <div className='y-flex mb-3 mt-7'>
             <h3 className='checkout-header'>Non Veg Pizzas</h3>
             <div className='checkout-bar'></div>
           </div> 

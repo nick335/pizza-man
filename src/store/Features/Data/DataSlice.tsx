@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { Action } from "@remix-run/router";
 import { cartItems } from "../Cart/CartSlice";
 
-interface Data {
+export interface Data {
   description: string
   id: number
   img: string
@@ -13,7 +13,7 @@ interface Data {
   quantitySelected: number
 }
 
-interface PizzaData extends Data{
+export interface PizzaData extends Data{
   veg: boolean 
 }
 
@@ -33,15 +33,15 @@ interface PizzaData extends Data{
   initialState,
   reducers: {
     setData: (state, actions) => {
-      const pizzaData:[] = actions.payload.pizzaData
-      const dessertData:[] = actions.payload.dessertData
+      const pizzaData:[] = actions.payload.updatedPizzaData
+      const dessertData:[] = actions.payload.updatedDessertData
       state.pizzaData = pizzaData.map((each:PizzaData) => {
             return {
               description: each.description,
               name:each.name,
               price:each.price,
               veg:each.veg,
-              quantity: 0,
+              quantity: each.quantity,
               quantitySelected:0,
               isPizza:true,
               id:each.id,
@@ -53,7 +53,7 @@ interface PizzaData extends Data{
              description: each.description,
               name:each.name,
               price:each.price,
-              quantity: 0,
+              quantity: each.quantity,
               quantitySelected:0,
               isPizza:false,
               id:each.id,

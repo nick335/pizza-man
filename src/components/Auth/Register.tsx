@@ -1,41 +1,79 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import google from '../../assets/google.svg'
 import { motion } from 'framer-motion'
-import { z } from 'zod'
+import { number, z } from 'zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAuthCreateUserWithEmailAndPassword } from '@react-query-firebase/auth'
+import { useAuthCreateUserWithEmailAndPassword, useAuthSignInWithPopup } from '@react-query-firebase/auth'
 import { auth, firestore } from '../firebase/firebase'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../store/RootReducer'
-import { setUid } from '../../store/Features/User/UserSlice'
+import { Loggedin } from '../../store/Features/User/UserSlice'
 import toast from 'react-hot-toast';
 import { collection, doc, setDoc } from 'firebase/firestore'
-import { useFirestoreDocumentMutation } from '@react-query-firebase/firestore'
+import { GoogleAuthProvider, getAdditionalUserInfo } from 'firebase/auth'
+
+// interface address {
+//   isAdded: boolean,
+//   number: number,
+//   city: string,
+//   state: string,
+//   country: string,
+//   pinCode: number,
+// }
 
 export default function Register() {
-  const mutation = useAuthCreateUserWithEmailAndPassword(auth)
-  const { uid } = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
-  const collectionRef = collection(firestore, 'users')
-  // if(mutation.isSuccess){
-  //   console.log(uid)
-  //   const ref = doc(collectionRef, 'tftfytyy')
-  //   const firestoreMutation = useFirestoreDocumentMutation(ref)
-  //   firestoreMutation.mutate({
-  //     currentOrder: [],
-  //     orderHistory: [],
-  //     address: []
-  //   })
-  //   console.log('working')
-  // }
+  const navigate = useNavigate()
+  const mutation = useAuthCreateUserWithEmailAndPassword(auth)
+  const googlemutation = useAuthSignInWithPopup(auth, {
+    onError(error){
+      toast.error(error.message, {
+        duration: 8000,
+        position: 'top-right'
+      },)
+    }, 
+    onSuccess(response){
+      dispatch(Loggedin(response.user.uid))
+      const info = getAdditionalUserInfo(response)
+      const docName = response.user.uid
+      const newUser = info?.isNewUser
+      if(newUser){
+        const layout = {
+          currentOrder: [],
+          orderHistory: [],
+          address: {
+            isAdded: false,
+            number: 0,
+            city: '',
+            state: '',
+            country: '',
+            pinCode: 0,
+          }
+        }
+        setDoc(doc(firestore, "users", docName), layout).catch((error) =>
+        toast.error(error.message, {
+          duration: 4000,
+          position: 'top-left'
+        })
+        ).then(() => {
+          navigate('/menu')
+        })
+      }else{
+        navigate('/menu')
+      }
+    }
+  })
 
+//page transition
   const pageMotion = {
     initial: {opacity: 0, },
     animate: {opacity: 1, transition: {duration: 0.8}},
     exit: {opacity: 0, transition: {duration: 0.8}}
   };
+
+  //form validation using zod
   type FormSchemaType = z.infer<typeof formSchema>
   const formSchema = z.object({
     email: z.string().email("Invalid email").min(1, "Email is required"),
@@ -64,31 +102,49 @@ export default function Register() {
       password: data.password
     }, {
       onError(error){
-        console.log(error.message)
         toast.error(error.message, {
-          duration: 4000,
-          position: 'top-left'
+          duration: 8000,
+          position: 'top-right'
         })
       },
       onSuccess(user){
         console.log(user)
-        dispatch(setUid(user.user.uid))
+        dispatch(Loggedin(user.user.uid))
         const docName = user.user.uid
         const layout = {
           currentOrder: [],
           orderHistory: [],
-          address: []
+          address: {
+            isAdded: false,
+            number: 0,
+            street: '',
+            city: '',
+            state: '',
+            country: '',
+            pinCode: 0,
+          }
         }
         setDoc(doc(firestore, "users", docName), layout).catch((error) =>
         toast.error(error.message, {
           duration: 4000,
           position: 'top-left'
         })
-        )
+        ).then(() => {
+          navigate('/menu')
+        })
       }
     })
 
   }
+
+   // handle google sign
+   function handleGoogleSignIn(){
+    googlemutation.mutate({
+      provider: new GoogleAuthProvider(),
+    },)
+  }
+
+
   return (
     <motion.section className='heightLayout' initial="initial" animate="animate" exit="exit" variants={pageMotion}>
       <div className='layout'>
@@ -127,7 +183,7 @@ export default function Register() {
             <button type='submit' className='btn mt-2.5' disabled={isSubmitting}>Register</button>
             <div className='flexCenter flex-col mt-2 gap-1'> 
               <strong className='uppercase font-semibold'>or</strong>
-              <div className='flex items-center w-[220px] bg-white shadow-lg py-3 pl-4 gap-3'>
+              <div className='flex items-center w-[220px] bg-white shadow-lg py-3 pl-4 gap-3' onClick={handleGoogleSignIn}>
                 <img src={google} alt='google_logo' className='google'/>
                 <strong className='text-goggle text-sm font-medium '>Sign in With Google</strong>
               </div>
