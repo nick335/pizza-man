@@ -16,14 +16,35 @@ export interface userAddress {
   pinCode: string | number,
 }
 
+export interface orderslist {
+  name:string,
+  quantity:number,
+  price: number,
+  total: number, 
+}
+
 interface userData {
   address: userAddress
+}
+
+interface orderDate {
+  day: number,
+  month:string
+  year: number
+}
+
+
+export interface userOrderHistory{
+  date: orderDate,
+  address: userAddress
+  orders: Array<orderslist>
 }
 
 interface userState {
   auth: UserAuth
   data: userData
-}
+  history: userOrderHistory[]
+}  
 
 const initialState: userState ={
   auth: {
@@ -40,8 +61,9 @@ const initialState: userState ={
       state: '',
       country: '',
       pinCode: 0,
-    }
-  }
+    },
+  },
+  history: []
 }
 const userSlice = createSlice({
   name: "user",
