@@ -6,20 +6,30 @@ import { RootState } from '../../store/RootReducer';
 import { collection, doc } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase';
 import { useFirestoreDocument } from '@react-query-firebase/firestore';
+import { setHistoryData, userOrderHistory } from '../../store/Features/User/UserSlice';
+import { useDispatch } from 'react-redux';
 
 
 
 export default function Orders() {
-  const [orderHistory, setOrderHistory] = React.useState([])
+  const dispatch = useDispatch()
   const { uid } = useSelector((state: RootState) => state.user.auth)
+  const { history } = useSelector((state: RootState) => state.user)
   const collectionRef = collection(firestore, "users")
   const ref = doc(collectionRef, uid)
+  var orderElement = []
+  orderElement = history.map((each) => {
+    return <Order 
+            address={each.address}
+            date={each.date}
+            orders={each.orders}
+          />
+  })
 
   const userOrders = useFirestoreDocument(['users', uid], ref, {}, {
     onSuccess(snapshot) {
-      const userData:any = snapshot.data()?.orderHistory
-      console.log(userData)
-      setOrderHistory(userData)
+      const orderHistory:Array<userOrderHistory> = snapshot.data()?.orderHistory
+      dispatch(setHistoryData({orderHistory}))
     },
     onError(error){
       console.log(error.message)
@@ -39,7 +49,7 @@ export default function Orders() {
         <div className='border-b-2 border-headerColor mb-5'>
           <h2 className='header'>Orders</h2>
         </div>
-        <Order />
+        {history.length === 0 ? <h2 className=''>You haven't ordered anything yet!</h2> : orderElement }
       </div>
     </motion.section>
   )

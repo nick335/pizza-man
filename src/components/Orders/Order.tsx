@@ -1,23 +1,37 @@
 import React from 'react'
 import OrderTable from './OrderTable'
+import { orderDate, orderslist, userAddress } from '../../store/Features/User/UserSlice'
 
-export default function Order() {
+interface props {
+  address: userAddress
+  date: orderDate
+  orders: Array<orderslist>
+  
+}
+
+export default function Order({address, date, orders}: props) {
+  var total = 0
+  orders.forEach((each) => {
+    total = each.total + total
+  })
   return (
     <div className='border-y-[0.5px] border-headerColor py-4'>
       <div className=''>
-        <strong>Time:<span className='ml-1 font-normal'>26th Friday</span></strong>
+        <strong>Time:<span className='ml-1 font-normal'>{date.day}th {date.month} {date.year}</span></strong>
         <div className='mt-1'>
           <strong>Address:</strong>
-          <p className='p-normal'>28 adedoyin</p>
-          <p className='p-normal'>Surulere, Lagos, Nigeria</p>
-          <p className='p-normal'>PIN:<span className='ml-1.5'>83838384848</span></p>
+          <p className='p-normal'>{address.number} {address.street}</p>
+          <p className='p-normal'>{address.city}, {address.state}, {address.country}</p>
+          <p className='p-normal'>PIN:<span className='ml-1.5'>{address.pinCode}</span></p>
         </div>
       </div>
       <div>
-        <OrderTable />
+        <OrderTable 
+            orders={orders}
+        />
       </div>
       <div className='mt-3'>
-        <strong>Total Price:<span className='ml-1 font-normal'>$6566</span></strong>
+        <strong>Total Price:<span className='ml-1 font-normal'>${total}</span></strong>
       </div>
     </div>
   )

@@ -27,7 +27,7 @@ interface userData {
   address: userAddress
 }
 
-interface orderDate {
+export interface orderDate {
   day: number,
   month:string
   year: number

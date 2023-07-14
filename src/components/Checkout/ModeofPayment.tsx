@@ -2,7 +2,7 @@ import React from 'react'
 import { toast } from 'react-hot-toast'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../store/RootReducer'
-import { userAddress, userOrderHistory } from '../../store/Features/User/UserSlice'
+import { setHistoryData, userAddress, userOrderHistory } from '../../store/Features/User/UserSlice'
 import { collection, doc } from 'firebase/firestore'
 import { firestore } from '../firebase/firebase'
 import { useFirestoreDocumentMutation } from '@react-query-firebase/firestore'
@@ -30,13 +30,6 @@ export default function ModeofPayment() {
         position: 'top-left'
       })
     },
-    onSuccess(){
-      const pizzaData = cartItems.pizzaData
-      const dessertData = cartItems.dessertData
-      dispatch(resetAllQtn({pizzaData, dessertData}))
-      dispatch(clearCart())
-      
-    }
   })
 
   console.log(cartItems)
@@ -114,6 +107,15 @@ export default function ModeofPayment() {
       console.log(updatedUserOrderHistory)
       mutation.mutate({
         orderHistory: updatedUserOrderHistory
+      }, {
+        onSuccess(){
+          const orderHistory = updatedUserOrderHistory
+          dispatch(setHistoryData({orderHistory}))
+          const pizzaData = cartItems.pizzaData
+          const dessertData = cartItems.dessertData
+          dispatch(resetAllQtn({pizzaData, dessertData}))
+          dispatch(clearCart())
+        }
       })
       // adress Data
       // orders which is an array of object consting of orders name, price, quantity, total.
