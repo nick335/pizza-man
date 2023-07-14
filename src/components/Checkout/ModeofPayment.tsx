@@ -1,15 +1,18 @@
 import React from 'react'
 import { toast } from 'react-hot-toast'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../store/RootReducer'
 import { userAddress, userOrderHistory } from '../../store/Features/User/UserSlice'
 import { collection, doc } from 'firebase/firestore'
 import { firestore } from '../firebase/firebase'
 import { useFirestoreDocumentMutation } from '@react-query-firebase/firestore'
 import { orderslist } from '../../store/Features/User/UserSlice'
+import { resetAllQtn } from '../../store/Features/Data/DataSlice'
+import { clearCart } from '../../store/Features/Cart/CartSlice'
 
 
 export default function ModeofPayment() {
+  const dispatch = useDispatch()
   const [modeofPayment, setModeofPayment] = React.useState<string>('')
   const addressData: userAddress = useSelector((state: RootState) => state.user.data.address)
   const { cartItems } = useSelector((state:RootState) => state.cart)
@@ -26,6 +29,13 @@ export default function ModeofPayment() {
         duration: 4000,
         position: 'top-left'
       })
+    },
+    onSuccess(){
+      const pizzaData = cartItems.pizzaData
+      const dessertData = cartItems.dessertData
+      dispatch(resetAllQtn({pizzaData, dessertData}))
+      dispatch(clearCart())
+      
     }
   })
 
@@ -100,8 +110,11 @@ export default function ModeofPayment() {
         address: addressData,
         orders:orders
       }
-      const updatedUserOrderHistory = history.push(currentOrderData)
+      const updatedUserOrderHistory = [...history, currentOrderData]
       console.log(updatedUserOrderHistory)
+      mutation.mutate({
+        orderHistory: updatedUserOrderHistory
+      })
       // adress Data
       // orders which is an array of object consting of orders name, price, quantity, total.
 

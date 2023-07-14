@@ -9,7 +9,7 @@ import { RootState } from '../../store/RootReducer'
 import { useFirestoreDocument } from '@react-query-firebase/firestore'
 import EmptyAddress from './EmptyAddress'
 import AddressForm from './AddressForm'
-import { setAddressData, userAddress } from '../../store/Features/User/UserSlice'
+import { setAddressData, setHistoryData, userAddress, userOrderHistory } from '../../store/Features/User/UserSlice'
 
 
 
@@ -26,8 +26,10 @@ export default function Checkout() {
   const userAddress = useFirestoreDocument(['user', uid], docref, {}, {
     onSuccess(snapshot){
       const addressData: userAddress = snapshot.data()?.address
+      const orderHistory: Array<userOrderHistory> = snapshot.data()?.orderHistory
       console.log(addressData)
       dispatch(setAddressData({addressData}))
+      dispatch(setHistoryData({orderHistory}))
     },
     onError(error){
       console.log(error.message)

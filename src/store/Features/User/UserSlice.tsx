@@ -85,9 +85,13 @@ const userSlice = createSlice({
         country:  data.country,
         pinCode: data.pinCode,
       }
+    },
+    setHistoryData: (state, action) => {
+      const data: Array<userOrderHistory> = action.payload.orderHistory
+      state.history = data
     }
   }
 })
 
 export default userSlice.reducer
-export const {Loggedin, setAddressData } = userSlice.actions
+export const {Loggedin, setAddressData, setHistoryData } = userSlice.actions
