@@ -42,7 +42,7 @@ export default function Orders() {
     exit: {opacity: 0, transition: {duration: 0.8}}
   };
   if(userOrders.error) return <div>error</div>
-  if (userOrders.isLoading) return <div>loading</div>
+  if (userOrders.isLoading) return <div className='heightLayout'>loading</div>
   return (
     <motion.section className='heightLayout pb-8' initial="initial" animate="animate" exit="exit" variants={pageMotion}>
       <div className='layout'>

@@ -16,7 +16,7 @@ export default function Thankyou() {
         <div className='border-b-2 border-headerColor mb-5'>
             <h2 className='header'>Order Placed</h2>
        </div>
-       <p>Your yummy pizza will arrive at your doorstep soon! :) </p>
+       <p className='font-sans text-3xl font-light md:text-4xl'>Your yummy pizza will arrive at your doorstep soon! :) </p>
       </div>
     </motion.section>
   )

@@ -44,6 +44,7 @@ interface userState {
   auth: UserAuth
   data: userData
   history: userOrderHistory[]
+  orderSuccessful: boolean
 }  
 
 const initialState: userState ={
@@ -63,7 +64,8 @@ const initialState: userState ={
       pinCode: 0,
     },
   },
-  history: []
+  history: [],
+  orderSuccessful: false
 }
 const userSlice = createSlice({
   name: "user",
@@ -89,9 +91,15 @@ const userSlice = createSlice({
     setHistoryData: (state, action) => {
       const data: Array<userOrderHistory> = action.payload.orderHistory
       state.history = data
+    },
+    confirmOrder: (state) => {
+      state.orderSuccessful = true;
+    },
+    resetOrderState: (state) => {
+      state.orderSuccessful = false
     }
   }
 })
 
 export default userSlice.reducer
-export const {Loggedin, setAddressData, setHistoryData } = userSlice.actions
+export const {Loggedin, setAddressData, setHistoryData, confirmOrder, resetOrderState } = userSlice.actions

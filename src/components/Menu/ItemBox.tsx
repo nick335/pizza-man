@@ -3,6 +3,9 @@ import { animate, motion } from 'framer-motion'
 import { addQtn, reduceQtn} from '../../store/Features/Data/DataSlice'
 import { useDispatch } from 'react-redux'
 import { increaseCartItemQtn, decreaseCartItemQtn } from '../../store/Features/Cart/CartSlice'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store/RootReducer'
+import { resetOrderState } from '../../store/Features/User/UserSlice'
 
 
 interface BoxProps {
@@ -18,8 +21,13 @@ interface BoxProps {
 
 export default function ItemBox({name, price, id, isPizza, quantity, img, desc}: BoxProps) {
   const dispatch = useDispatch()
+  const { orderSuccessful } = useSelector((state: RootState) => state.user)
 
   function handleAdd(id:number, isPizza:boolean){
+    if(orderSuccessful){
+      dispatch(resetOrderState())
+    }
+
     dispatch(addQtn({id, isPizza}))
     dispatch(increaseCartItemQtn({id, isPizza, quantity, price}))
   }

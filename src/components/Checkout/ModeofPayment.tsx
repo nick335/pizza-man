@@ -2,17 +2,19 @@ import React from 'react'
 import { toast } from 'react-hot-toast'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../store/RootReducer'
-import { setHistoryData, userAddress, userOrderHistory } from '../../store/Features/User/UserSlice'
+import { confirmOrder, setHistoryData, userAddress, userOrderHistory } from '../../store/Features/User/UserSlice'
 import { collection, doc } from 'firebase/firestore'
 import { firestore } from '../firebase/firebase'
 import { useFirestoreDocumentMutation } from '@react-query-firebase/firestore'
 import { orderslist } from '../../store/Features/User/UserSlice'
 import { resetAllQtn } from '../../store/Features/Data/DataSlice'
 import { clearCart } from '../../store/Features/Cart/CartSlice'
-
+import { useNavigate } from 'react-router-dom'
 
 export default function ModeofPayment() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const [modeofPayment, setModeofPayment] = React.useState<string>('')
   const addressData: userAddress = useSelector((state: RootState) => state.user.data.address)
   const { cartItems } = useSelector((state:RootState) => state.cart)
@@ -109,8 +111,13 @@ export default function ModeofPayment() {
         orderHistory: updatedUserOrderHistory
       }, {
         onSuccess(){
+          //update order history array
           const orderHistory = updatedUserOrderHistory
           dispatch(setHistoryData({orderHistory}))
+         // navigate to thankyou page
+          dispatch(confirmOrder())
+          navigate('/thankyou')
+          // reset cart 
           const pizzaData = cartItems.pizzaData
           const dessertData = cartItems.dessertData
           dispatch(resetAllQtn({pizzaData, dessertData}))

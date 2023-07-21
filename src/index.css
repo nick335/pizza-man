@@ -44,6 +44,10 @@ li {
   min-height: calc(100vh - 288px - 56px);
   min-height: calc(100dvh - 288px - 56px);
 }
+.heightLayout2{
+  min-height: calc(100vh - 56px);
+  min-height: calc(100dvh - 56px);
+}
 @media only screen and (max-width: 768px){
 	/*Big smartphones [426px -> 600px]*/
   .heightLayout{
