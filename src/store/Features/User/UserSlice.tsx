@@ -97,9 +97,13 @@ const userSlice = createSlice({
     },
     resetOrderState: (state) => {
       state.orderSuccessful = false
+    },
+    LoggedOut: (state) => {
+      state.auth.loggedIn = false,
+      state.auth.uid= ''
     }
   }
 })
 
 export default userSlice.reducer
-export const {Loggedin, setAddressData, setHistoryData, confirmOrder, resetOrderState } = userSlice.actions
+export const {Loggedin, setAddressData, setHistoryData, confirmOrder, resetOrderState, LoggedOut } = userSlice.actions
