@@ -34,6 +34,9 @@ module.exports = {
         errorBg: '#f8d7da',
         errorBorder: '#f5c6cb',
         errorColor: '#721c24',
+        loadingBody: 'hsl(0, 0%, 94%)',
+        pencilPrimary: '#232123',
+        pencilSec: 'hsl(253.2,93.5%,63.7%)',
       },
       fontFamily: {
         Roboto: ['Roboto', 'sans-serif']
@@ -47,6 +50,23 @@ module.exports = {
           '0%' : { left: '0%' },
           '100%' : { left: '-70%' }
         },
+        pencil: {
+          '0%': { transform: 'rotate(135deg)' },
+          '20%': {transform: 'rotate(315deg)' },
+          '45%': { transform: 'translateX(300px) rotate(315deg)' },
+          '55%' : {transform: 'translateX(300px) rotate(495deg)'},
+          '100%' : { transform: 'rotate(495deg)'}
+        },
+        line: {
+          '20%': { transform: 'scaleX(0)' },
+          '45%': { transform: 'scaleX(0.6)' },
+          '55%' : { transform: 'scaleX(0.6)' },
+          '100%': { transform: 'scaleX(0)' }
+        }
+       },
+       animation: {
+        pencil: 'pencil 10s infinite',
+        line: 'line 10s infinite',
        },
        screens: {
         'xsm': '340px',
@@ -56,7 +76,8 @@ module.exports = {
         'xssm': '590px'
        },
        clipPath: {
-        mypolygon: "polygon(50% 100%, 0 0, 100% 0)"
+        mypolygon: "polygon(50% 100%, 0 0, 100% 0)",
+        pencilCap: "polygon(20% 40%, 100% 0%, 100% 100%, 20% 60%)"
        },
        dropShadow: {
         '5xl': '0 0 8px #888888',

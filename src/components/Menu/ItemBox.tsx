@@ -23,6 +23,7 @@ export default function ItemBox({name, price, id, isPizza, quantity, img, desc}:
   const dispatch = useDispatch()
   const { orderSuccessful } = useSelector((state: RootState) => state.user)
 
+  // add items to cart state and items display state 
   function handleAdd(id:number, isPizza:boolean){
     if(orderSuccessful){
       dispatch(resetOrderState())
@@ -31,6 +32,7 @@ export default function ItemBox({name, price, id, isPizza, quantity, img, desc}:
     dispatch(addQtn({id, isPizza}))
     dispatch(increaseCartItemQtn({id, isPizza, quantity, price}))
   }
+  // remove items from cart state and items display state
   function handleRemove(){
     dispatch(reduceQtn({id, isPizza}))
     dispatch(decreaseCartItemQtn({id, isPizza, quantity, price}))
@@ -42,9 +44,9 @@ export default function ItemBox({name, price, id, isPizza, quantity, img, desc}:
       <div className='w-[200px] h-[150px] overflow-hidden rounded-t-lg'>
         <motion.img src={img} alt="pizzaimg" className='w-[200px] h-[150px] object-cover rounded-t-lg cursor-pointer' whileHover={{scale: 1.2, transition: {duration: 0.5, type:"spring", stiffness: 100}}} />
       </div>
-      <div className='px-4 pt-0.5 font-Roboto'>
-        <strong className=' font-normal text-base text-headerColor font-sans'>{name}</strong>
-        <p className='text-headerColor font-thin text-[13px] italic leading-[15px] pt-[0.7px]'>{desc}</p>
+      <div className='px-4 pt-0.5 font-Roboto flex-col'>
+        <strong className=' font-normal text-base text-headerColor font-sans leading-[0px]'>{name}</strong>
+        <p className='text-headerColor font-thin text-[13px] italic leading-[15px] pt-[0.7px] min-h-[70px]'>{desc}</p>
         <div className='flex items-center justify-between mt-3 pb-2.5'>
           <p className='font-light italic text-sm'>${price}</p>
           <div>

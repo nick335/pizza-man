@@ -29,7 +29,7 @@ export default function Login() {
       )
     },
     onSuccess(response){
-      dispatch(Loggedin(response.user.uid))
+      // dispatch(Loggedin(response.user.uid))
       navigate('/menu')
     }
   })
@@ -42,10 +42,11 @@ export default function Login() {
       },)
     },
     onSuccess(response){
-      dispatch(Loggedin(response.user.uid))
+      // checking for new users
       const info = getAdditionalUserInfo(response)
       const docName = response.user.uid
       const newUser = info?.isNewUser
+      // setting up a database layout for new users
       if(newUser){
         const layout = {
           currentOrder: [],

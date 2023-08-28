@@ -21,6 +21,7 @@ import { Toaster } from 'react-hot-toast';
 import PrivateRoute from './components/Routes/PrivateRoute';
 import PrivateRoute2 from './components/Routes/PrivateRoute2';
 import PrivateRoute3 from './components/Routes/PrivateRoute3';
+import RouteLoader from './components/Loaders/RouteLoader';
 
 
 // const location = useLocation()
@@ -29,12 +30,12 @@ const queryClient = new QueryClient()
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <React.Suspense fallback={<div className='heightLayout'>loading...</div>}><App /></React.Suspense>,
+    element: <React.Suspense fallback={<RouteLoader />}><App /></React.Suspense>,
     errorElement: <Error404 />,
     children: [
       {
         path: "/",
-        element: <React.Suspense fallback={<div className='heightLayout'>loading...</div>}><Hero /></React.Suspense>
+        element: <React.Suspense fallback={<RouteLoader />}><Hero /></React.Suspense>
       },
       {
         path: "/menu",
@@ -42,23 +43,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/orders",
-        element: <React.Suspense fallback={<div className='heightLayout'>loading...</div>}><PrivateRoute  children={<Orders />} /></React.Suspense>
+        element: <React.Suspense fallback={<RouteLoader />}><PrivateRoute  children={<Orders />} /></React.Suspense>
       },
       {
         path: "/login",
-        element: <React.Suspense fallback={<div className='heightLayout'>loading...</div>}><Login /></React.Suspense>
+        element: <React.Suspense fallback={<RouteLoader />}><Login /></React.Suspense>
       },
       {
         path: "/Register",
-        element: <React.Suspense fallback={<div className='heightLayout'>loading...</div>}><Register /></React.Suspense>
+        element: <React.Suspense fallback={<RouteLoader />}><Register /></React.Suspense>
       },
       {
         path: "/Checkout",
-        element: <React.Suspense fallback={<div className='heightLayout'>loading...</div>}><PrivateRoute2  children={<Checkout />}/></React.Suspense>
+        element: <React.Suspense fallback={<RouteLoader />}><PrivateRoute2  children={<Checkout />}/></React.Suspense>
       },
       {
         path: "/thankyou",
-        element: <React.Suspense fallback={<div className='heightLayout'>loading...</div>}><PrivateRoute3 children={<Thankyou />}/></React.Suspense>
+        element: <React.Suspense fallback={<RouteLoader />}><PrivateRoute3 children={<Thankyou />}/></React.Suspense>
       }
     ]
   }

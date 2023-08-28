@@ -35,7 +35,6 @@ export default function Register() {
       },)
     }, 
     onSuccess(response){
-      dispatch(Loggedin(response.user.uid))
       const info = getAdditionalUserInfo(response)
       const docName = response.user.uid
       const newUser = info?.isNewUser
@@ -108,8 +107,6 @@ export default function Register() {
         })
       },
       onSuccess(user){
-        console.log(user)
-        dispatch(Loggedin(user.user.uid))
         const docName = user.user.uid
         const layout = {
           currentOrder: [],
