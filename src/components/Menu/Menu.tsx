@@ -11,6 +11,7 @@ import Pizzas from './Pizzas';
 import { RootState } from '../../store/RootReducer';
 import { Data, PizzaData } from '../../store/Features/Data/DataSlice';
 import { cartItems } from '../../store/Features/Cart/CartSlice';
+import PizzaLoader from '../Loaders/PizzaLoader';
 
 export default function Menu() {
   const dispatch = useDispatch()
@@ -23,7 +24,6 @@ export default function Menu() {
   }, {
     onSuccess(snapshot) {
         const pizzaData = snapshot.data()?.pizzaData
-        console.log(pizzaData)
         const dessertData:[] = snapshot.data()?.dessertData
         let updatedPizzaData = []
         let updatedDessertData = []
@@ -96,7 +96,7 @@ export default function Menu() {
         </div>
         <div className='my-6'>
           {
-             pizzamanData.isLoading ? <div>loading....</div> : pizzamanData.isError ? <div>{pizzamanData.error.message}</div> : 
+             pizzamanData.isLoading ? <PizzaLoader layout={false} /> : pizzamanData.isError ? <div>{pizzamanData.error.message}</div> : 
              <>
               <Pizzas />
               <Desserts />

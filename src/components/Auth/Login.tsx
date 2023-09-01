@@ -16,7 +16,6 @@ import { Loggedin } from '../../store/Features/User/UserSlice'
 import { useNavigate } from 'react-router-dom'
 import { firestore } from '../firebase/firebase'
 export default function Login() {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   // login using react query firebase with email and password
@@ -29,7 +28,6 @@ export default function Login() {
       )
     },
     onSuccess(response){
-      // dispatch(Loggedin(response.user.uid))
       navigate('/menu')
     }
   })
@@ -99,7 +97,6 @@ export default function Login() {
   })
 
   const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
-    console.log(data)
     mutation.mutate({
       email:data.email,
       password:data.password

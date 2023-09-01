@@ -5,14 +5,13 @@ import { getAuth } from "firebase/auth";
 
 
 const firebase = initializeApp({
-  apiKey: "AIzaSyBdHmt7fC6TIZANNHzsgApsotMibRxEVHo",
-  authDomain: "pizza-man-development-cc88f.firebaseapp.com",
-  projectId: "pizza-man-development-cc88f",
-  storageBucket: "pizza-man-development-cc88f.appspot.com",
-  messagingSenderId: "354495913980",
-  appId: "1:354495913980:web:f8eb0215b12a67a898dc79"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 })
 
-console.log(firebase.options.apiKey)
 export const auth = getAuth(firebase)
 export const firestore = getFirestore(firebase);

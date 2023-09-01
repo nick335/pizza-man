@@ -49,7 +49,7 @@ export default function Pizzas() {
             <h3 className='checkout-header'>Veg Pizzas</h3>
             <div className='checkout-bar'></div>
           </div> 
-          <div className='flex items-stretch justify-evenly w-full flex-wrap gap-y-6'>
+          <div className='flex items-stretch justify-evenly w-full flex-wrap gap-y-6 gap-x-2'>
             {vegElements}
           </div>
         </div>
@@ -58,7 +58,7 @@ export default function Pizzas() {
             <h3 className='checkout-header'>Non Veg Pizzas</h3>
             <div className='checkout-bar'></div>
           </div> 
-          <div className='flex items-stretch  justify-evenly w-full flex-wrap gap-y-6'>
+          <div className='flex items-stretch  justify-evenly w-full flex-wrap gap-y-6 gap-x-2'>
             {nonVegElements}
           </div>
         </div>

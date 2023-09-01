@@ -34,14 +34,8 @@ export default function ModeofPayment() {
     },
   })
 
-  console.log(cartItems)
-
-
   function GetOrdersList(){
-
-
     const orders: Array<orderslist> =[]
-
     cartItems.pizzaData.forEach((each) => {
       pizzaData.forEach((item) => {
         if(each.id === item.id){
@@ -68,7 +62,6 @@ export default function ModeofPayment() {
         )
       })
     })
-
     return orders
   }
 
@@ -76,6 +69,7 @@ export default function ModeofPayment() {
     setModeofPayment('cash')
   }
 
+  
   function getDate(){
     const date = new Date();
     const year = date.getFullYear();

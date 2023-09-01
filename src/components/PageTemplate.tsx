@@ -1,14 +1,18 @@
-import React from 'react'
-import { motion,  HTMLMotionProps, createMotionComponent, AnimatePresence } from 'framer-motion'
-import Home from './Home/Home'
-import Intro from './intro/Intro'
-import RouteLoader from './Loaders/RouteLoader'
+import Header from './Home/Header/Header'
+import ScrollToTop from './Routes/ScrollToTop'
+import RouteTemplate from './Routes/RouteTemplate'
+import Footer from './Home/Footer/Footer'
+import CartBox from './Cart/CartBox'
 
 
 export default function PageTemplate() {
   return (
       <div>
-        <Home />
+        <Header />
+        <ScrollToTop />
+        <RouteTemplate />
+        <Footer />
+        <CartBox />
       </div>
   )
 }

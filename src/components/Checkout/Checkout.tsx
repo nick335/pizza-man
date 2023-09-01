@@ -10,6 +10,8 @@ import { useFirestoreDocument } from '@react-query-firebase/firestore'
 import EmptyAddress from './EmptyAddress'
 import AddressForm from './AddressForm'
 import { setAddressData, setHistoryData, userAddress, userOrderHistory } from '../../store/Features/User/UserSlice'
+import { toast } from 'react-hot-toast'
+import PizzaLoader from '../Loaders/PizzaLoader'
 
 
 
@@ -23,32 +25,38 @@ export default function Checkout() {
   const collectionRef = collection(firestore, "users")
   const docref = doc(collectionRef, uid)
 
+  // get user adress to deliver pizza
   const userAddress = useFirestoreDocument(['user', uid], docref, {}, {
     onSuccess(snapshot){
       const addressData: userAddress = snapshot.data()?.address
       const orderHistory: Array<userOrderHistory> = snapshot.data()?.orderHistory
-      console.log(addressData)
       dispatch(setAddressData({addressData}))
       dispatch(setHistoryData({orderHistory}))
     },
     onError(error){
-      console.log(error.message)
+      toast.error(error.message, {
+        duration: 8000,
+        position: 'top-right'
+      })
     }
   })
   
+  // page transition 
   const pageMotion = {
     initial: {opacity: 0, },
     animate: {opacity: 1, transition: {duration: 0.8}},
     exit: {opacity: 0, transition: {duration: 0.8}}
   };
 
+  // show add Address form
   function add(){
     setAddAddress(true)
   }
+  // close add Address form
   function cancel(){
     setAddAddress(false)
   }
-  if(userAddress.isLoading) return <div>Loading...</div>
+  if(userAddress.isLoading) return <PizzaLoader layout={true} />
   return (
     <motion.section className='heightLayout pb-20'  initial="initial" animate="animate" exit="exit" variants={pageMotion}>
       <div className='layout'>

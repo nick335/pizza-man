@@ -1,5 +1,6 @@
 import React from 'react'
 import { orderslist } from '../../store/Features/User/UserSlice'
+import { nanoid } from '@reduxjs/toolkit'
 
 interface props {
   orders: Array<orderslist>
@@ -8,7 +9,7 @@ interface props {
 export default function OrderTable({orders}: props) {
   var tableElements = []
   tableElements = orders.map((each, idx) => {
-    return <tr className='table-border'>
+    return <tr className='table-border' key={nanoid()} >
               <th className='table-items' scope='row'>{idx + 1}</th>
               <td className='table-items'>{each.name}</td>
               <td className='table-items'>{each.price}</td>
