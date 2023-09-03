@@ -3,6 +3,7 @@ import ScrollToTop from './Routes/ScrollToTop'
 import RouteTemplate from './Routes/RouteTemplate'
 import Footer from './Home/Footer/Footer'
 import CartBox from './Cart/CartBox'
+import Error from './Error'
 
 
 export default function PageTemplate() {

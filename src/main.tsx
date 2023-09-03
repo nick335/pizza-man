@@ -22,6 +22,7 @@ import PrivateRoute from './components/Routes/PrivateRoute';
 import PrivateRoute2 from './components/Routes/PrivateRoute2';
 import PrivateRoute3 from './components/Routes/PrivateRoute3';
 import RouteLoader from './components/Loaders/RouteLoader';
+import { nanoid } from '@reduxjs/toolkit';
 
 
 // const location = useLocation()
@@ -71,7 +72,7 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient} contextSharing={true}>
       <Provider store={store}>
-        <AnimatePresence mode='wait'>
+        <AnimatePresence mode='wait' key={nanoid()}>
           <RouterProvider router={router} />
           <Toaster />
         </AnimatePresence>

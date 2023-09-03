@@ -3,6 +3,9 @@ import { auth } from "./components/firebase/firebase"
 import { useDispatch } from "react-redux"
 import { onAuthStateChanged } from "firebase/auth"
 import { LoggedOut, Loggedin } from "./store/Features/User/UserSlice"
+import { ErrorBoundary } from "react-error-boundary"
+import Error from "./components/Error"
+import Fallback from "./components/Error"
 
 
 function App() {
@@ -18,7 +21,9 @@ function App() {
   })
   return (
     <div className="App">
-      <PageTemplate />
+      <ErrorBoundary FallbackComponent={Fallback}>
+        <PageTemplate />
+      </ErrorBoundary>
     </div>
   )
 }

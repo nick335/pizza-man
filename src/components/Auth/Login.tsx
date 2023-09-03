@@ -138,7 +138,7 @@ export default function Login() {
             <button type='submit' disabled={isSubmitting} className='btn mt-2.5'>Login</button>
             <div className='flexCenter flex-col mt-2 gap-1'>
               <strong className='uppercase font-semibold'>or</strong>
-              <div className='flex items-center w-[220px] bg-white shadow-lg py-3 pl-4 gap-3' onClick={handleGoogleSignIn}>
+              <div className='flex items-center w-[220px] bg-white shadow-lg py-3 pl-4 gap-3 cursor-pointer' onClick={handleGoogleSignIn}>
                 <img src={google} alt='google_logo' className='google'/>
                 <strong className='text-goggle text-sm font-medium '>Sign in With Google</strong>
               </div>

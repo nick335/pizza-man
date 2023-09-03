@@ -176,11 +176,11 @@ export default function Register() {
             </div>
           </div>
           <div className='pt-2 font-bold text-base text-headerColor font-sans pb-24'>
-            <p className='pl-1'>Already registered<span className='text-registerLink underline pl-1'><Link to="/register">Login</Link></span></p>
+            <p className='pl-1'>Already registered<span className='text-registerLink underline pl-1'><Link to="/login">Login</Link></span></p>
             <button type='submit' className='btn mt-2.5' disabled={isSubmitting}>Register</button>
             <div className='flexCenter flex-col mt-2 gap-1'> 
               <strong className='uppercase font-semibold'>or</strong>
-              <div className='flex items-center w-[220px] bg-white shadow-lg py-3 pl-4 gap-3' onClick={handleGoogleSignIn}>
+              <div className='flex items-center w-[220px] bg-white shadow-lg py-3 pl-4 gap-3 cursor-pointer' onClick={handleGoogleSignIn}>
                 <img src={google} alt='google_logo' className='google'/>
                 <strong className='text-goggle text-sm font-medium '>Sign in With Google</strong>
               </div>
