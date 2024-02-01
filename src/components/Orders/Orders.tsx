@@ -24,7 +24,8 @@ export default function Orders() {
   const ref = doc(collectionRef, uid)
  // getting user orders date from orders store
   var orderElement = []
-  orderElement = history.map((each) => {
+  const reversedHistory = [...history].reverse();
+  orderElement = reversedHistory.map((each) => {
     return <Order 
             address={each.address}
             date={each.date}
