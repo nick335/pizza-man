@@ -8,7 +8,7 @@ interface props {
 const SEOPAGEHeader = ({ page, href }: props) => {
   return (
     <Helmet>
-      <title>{page} - PizzaMan delivery website</title>
+      <title>{page} - PizzaMan Delivery Website</title>
       <link rel='canonical' href={href} />
     </Helmet>
   )

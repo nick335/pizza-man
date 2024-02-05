@@ -15,7 +15,7 @@ export default function Hero() {
   return (
     <motion.section className="h-[calc(100dvh-56px)] after:absolute relative after:top-0 after:w-full after:h-full after:bg-black after:bg-opacity-70 bg-[url('./assets/pizzman-hero-bg.png')] bg-center bg-cover" initial="initial" animate="animate" exit="exit" variants={pageMotion}>
       <SEOPAGEHeader 
-        page='home'
+        page='Home'
         href='https://pizza-man-nine.vercel.app'
       />
       <div className='layout z-[9] relative pt-10'>
