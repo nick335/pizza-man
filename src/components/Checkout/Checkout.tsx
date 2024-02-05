@@ -12,6 +12,7 @@ import AddressForm from './AddressForm'
 import { setAddressData, setHistoryData, userAddress, userOrderHistory } from '../../store/Features/User/UserSlice'
 import { toast } from 'react-hot-toast'
 import PizzaLoader from '../Loaders/PizzaLoader'
+import SEOPAGEHeader from '../SEO/Header'
 
 
 
@@ -59,6 +60,10 @@ export default function Checkout() {
   if(userAddress.isLoading) return <PizzaLoader layout={true} />
   return (
     <motion.section className='heightLayout pb-20'  initial="initial" animate="animate" exit="exit" variants={pageMotion}>
+      <SEOPAGEHeader 
+        page='Checkout'
+        href='https://pizza-man-nine.vercel.app/checkout'
+      />
       <div className='layout'>
         <div className='border-b-2 border-headerColor mb-5'>
           <h2 className='header'>checkout</h2>

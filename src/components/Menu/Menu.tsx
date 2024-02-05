@@ -12,6 +12,7 @@ import { RootState } from '../../store/RootReducer';
 import { Data, PizzaData } from '../../store/Features/Data/DataSlice';
 import { cartItems } from '../../store/Features/Cart/CartSlice';
 import PizzaLoader from '../Loaders/PizzaLoader';
+import SEOPAGEHeader from '../SEO/Header';
 
 export default function Menu() {
   const dispatch = useDispatch()
@@ -90,6 +91,10 @@ export default function Menu() {
 
   return (
     <motion.section className='heightLayout' initial="initial" animate="animate" exit="exit" variants={pageMotion}>
+      <SEOPAGEHeader 
+        page='Menu'
+        href='https://pizza-man-nine.vercel.app/menu'
+      />
       <div className='layout'>
         <div className='border-b-2 border-headerColor'>
           <h2 className='header'>Menu</h2>

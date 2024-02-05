@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import SEOPAGEHeader from '../SEO/Header'
 
 export default function Thankyou() {
 
@@ -12,6 +13,10 @@ export default function Thankyou() {
 
   return (
     <motion.section className='heightLayout pb-8' initial="initial" animate="animate" exit="exit" variants={pageMotion}>
+      <SEOPAGEHeader 
+        page='Thankyou'
+        href='https://pizza-man-nine.vercel.app/thankyou'
+      />
       <div className='layout'>
         <div className='border-b-2 border-headerColor mb-5'>
             <h2 className='header'>Order Placed</h2>

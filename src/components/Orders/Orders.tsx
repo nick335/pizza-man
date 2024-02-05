@@ -12,6 +12,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import PizzaLoader from '../Loaders/PizzaLoader';
 import { faL } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-hot-toast';
+import SEOPAGEHeader from '../SEO/Header';
 
 
 
@@ -55,6 +56,10 @@ export default function Orders() {
 
   return (
     <motion.section className='heightLayout pb-8' initial="initial" animate="animate" exit="exit" variants={pageMotion}>
+      <SEOPAGEHeader 
+        page='Orders'
+        href='https://pizza-man-nine.vercel.app/orders'
+      />
       <div className='layout'>
         <div className='border-b-2 border-headerColor mb-5'>
           <h2 className='header'>Orders</h2>
