@@ -15,6 +15,7 @@ import { setDoc, doc } from 'firebase/firestore'
 import { Loggedin } from '../../store/Features/User/UserSlice'
 import { useNavigate } from 'react-router-dom'
 import { firestore } from '../firebase/firebase'
+import SEOPAGEHeader from '../SEO/Header'
 export default function Login() {
   const navigate = useNavigate()
 
@@ -110,6 +111,10 @@ export default function Login() {
   }
   return (
     <motion.section className='heightLayout' initial="initial" animate="animate" exit="exit" variants={pageMotion}>
+      <SEOPAGEHeader 
+        page='Login'
+        href='https://pizza-man-nine.vercel.app/login'
+      />
       <div className='layout'>
         <div className='border-b-2 border-headerColor'>
           <h2 className='header'>Login</h2>

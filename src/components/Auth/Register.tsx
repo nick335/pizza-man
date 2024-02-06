@@ -13,6 +13,7 @@ import { Loggedin } from '../../store/Features/User/UserSlice'
 import toast from 'react-hot-toast';
 import { collection, doc, setDoc } from 'firebase/firestore'
 import { GoogleAuthProvider, getAdditionalUserInfo } from 'firebase/auth'
+import SEOPAGEHeader from '../SEO/Header'
 
 // interface address {
 //   isAdded: boolean,
@@ -95,7 +96,6 @@ export default function Register() {
     resolver: zodResolver(formSchema)
   })
   const onSubmit: SubmitHandler<FormSchemaType> = (data) =>{
-    console.log(data)
     mutation.mutate({
       email: data.email,
       password: data.password
@@ -144,6 +144,10 @@ export default function Register() {
 
   return (
     <motion.section className='heightLayout' initial="initial" animate="animate" exit="exit" variants={pageMotion}>
+      <SEOPAGEHeader 
+        page='Register'
+        href='https://pizza-man-nine.vercel.app/Register'
+      />
       <div className='layout'>
         <div className='border-b-2 border-headerColor'>
           <h2 className='header'>Register</h2>
